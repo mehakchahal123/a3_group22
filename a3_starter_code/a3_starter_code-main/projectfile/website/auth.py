@@ -5,6 +5,8 @@ from .forms import LoginForm,RegisterForm
 from flask_login import login_user, login_required,logout_user
 from . import db
 
+#test comment
+
 # Create a blueprint - make sure all BPs have unique names
 auth_bp = Blueprint('auth', __name__)
 
