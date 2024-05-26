@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
         return f"Name: {self.name}"
 
 
-class Event(db.model):
+class Event(db.Model):
     __tablename__ = 'event'
     eventid = db.Column(db.Integer, primary_key=True, nullable=False)
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
