@@ -6,14 +6,15 @@ from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     # specify table name
-    __tablename__='users' 
+    __tablename__ = 'users' 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     userName = db.Column(db.String(100), index=True, nullable=False)
     emailid = db.Column(db.String(100), index=True, unique=True, nullable=False)
     contactNumber = db.Column(db.String(100))
     password_hash = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255))
-    user = db.relationship('Order', backref='user')
+
+    bookings = db.relationship('Booking', backref='user')
     # relation to call user.comments and comment.created_by
 
     comments = db.relationship('Comment', backref='user')
@@ -23,16 +24,13 @@ class User(db.Model, UserMixin):
 
 
 class Event(db.Model):
-    __tablename__ = 'event'
-    eventid = db.Column(db.Integer, primary_key=True, nullable=False)
+    __tablename__ = 'events'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
     eventName = db.Column(db.String(80))
-    eventstartDate = db.Column(db.Date, nullable=False)
-    eventstartTime = db.Column(db.Time, nullable=False)
-    eventendDate = db.Column(db.Date, nullable=False)
-    eventendTime = db.Column(db.Time, nullable=False)
-    eventType = db.Column(db.Integer, db.ForeignKey('type.typeid'))
-    eventStates = db.Column(db.Integer, db.ForeignKey('states.statesid'))
+    eventstartDateTime = db.Column(db.DateTime, nullable=False)
+    eventendDateTime = db.Column(db.DateTime, nullable=False)
+    eventType = db.Column(db.String(50))
     eventLocation = db.Column(db.String(200))
     description = db.Column(db.String(200))
     ticketQuantity = db.Column(db.Integer)
@@ -40,7 +38,7 @@ class Event(db.Model):
     ticketPrice = db.Column(db.Integer)
     eventImage = db.Column(db.String(400))
 
-    order = db.relationship('Order', backref='event')
+    bookings = db.relationship('Booking', backref='event')
     comments = db.relationship('Comment', backref='event')
      # string print method
     def __repr__(self):
@@ -57,7 +55,19 @@ class Comment(db.Model):
 
     #add the foreign keys
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
-    eventid = db.Column(db.Integer, db.ForeignKey('event.eventid'))
+    eventid = db.Column(db.Integer, db.ForeignKey('events.id'))
      # string print method
     def __repr__(self):
-        return f"Name: {self.name}"
+        return f"Name: {self.comment}"
+    
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+    id = db.Column(db.Integer, primary_key=True)
+    numTickets = db.Column(db.Integer)
+    totalPrice = db.Column(db.Integer)
+    #add the foreign keys
+    userid = db.Column(db.Integer, db.ForeignKey('users.id'))
+    eventid = db.Column(db.Integer, db.ForeignKey('events.id'))
+    # string print method
+    def __repr__(self):
+        return f"Name: {self.comment}"
