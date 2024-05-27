@@ -12,9 +12,14 @@
       <header>Sign Up</header>
       <form id="registerForm" onsubmit="registerUser(event)">
         <div class="field input">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" autocomplete="off" required>
+          <label for="firstname">First Name</label>
+          <input type="text" name="firstname" id="firstname" autocomplete="off" required>
         </div>
+
+        <div class="field input">
+            <label for="surname">Surname</label>
+            <input type="text" name="surname" id="surname" autocomplete="off" required>
+          </div>
 
         <div class="field input">
           <label for="password">Password</label>
@@ -22,8 +27,8 @@
         </div>
 
         <div class="field input">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="off" required>
+          <label for="contact_number">Contact Number</label>
+          <input type="password" name="contact_number" id="contact_number" autocomplete="off" required>
         </div>
 
         <div class="field input">
@@ -32,10 +37,11 @@
         </div>
 
         <div class="field input">
-          <label for="age">Age</label>
-          <input type="number" name="age" id="age" autocomplete="off" required>
-        </div>
+            <label for="address">Street Address</label>
+            <input type="address" name="address" id="address" autocomplete="off" required>
+          </div>
 
+        
         <div class="field">
           <input type="submit" name="submit" value="Sign Up" class="btn btn-primary">
         </div>
