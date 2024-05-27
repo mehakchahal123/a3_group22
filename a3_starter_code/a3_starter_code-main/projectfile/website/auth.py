@@ -15,20 +15,20 @@ def register():
     #the validation of form is fine, HTTP request is POST
     if (register.validate_on_submit()==True):
             #get username, password and email from the form
-            uname = register.user_name.data
-            pwd = register.password.data
-            email = register.email_id.data
+            userName = register.userName.data
+            password = register.password.data
+            emailid = register.emailid.data
             contactNumber = register.contactNumber.data
             address = register.address.data
             #check if a user exists
-            user = db.session.scalar(db.select(User).where(User.name==uname))
+            user = db.session.scalar(db.select(User).where(User.userName==userName))
             if user:#this returns true when user is not None
                 flash('Username already exists, please try another')
                 return redirect(url_for('auth.register'))
             # don't store the password in plaintext!
-            pwd_hash = generate_password_hash(pwd)
+            pwd_hash = generate_password_hash(password)
             #create a new User model object
-            new_user = User(name=uname, password_hash=pwd_hash, emailid=email, contactNumber=contactNumber, address=address)
+            new_user = User(userName=userName, password_hash=pwd_hash, emailid=emailid, contactNumber=contactNumber, address=address)
             db.session.add(new_user)
             db.session.commit()
             #commit to the database and redirect to HTML page
@@ -43,9 +43,9 @@ def login():
     error = None
     if(login_form.validate_on_submit()==True):
         #get the username and password from the database
-        user_name = login_form.user_name.data
+        userName = login_form.userName.data
         password = login_form.password.data
-        user = db.session.scalar(db.select(User).where(User.name==user_name))
+        user = db.session.scalar(db.select(User).where(User.userName==userName))
         #if there is no user with that name
         if user is None:
             error = 'Incorrect username'#could be a security risk to give this much info away

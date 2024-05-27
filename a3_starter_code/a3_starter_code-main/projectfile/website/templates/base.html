@@ -59,16 +59,26 @@
     
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                     <a class="nav-link disabled text-muted" href="#">Welcome {{current_user.userName}}</a>
+                  </li>
+                  <li>
+                     <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+                  </li>
+                  {% else %}
                   <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.login') }}">Sign in</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.register') }}">Sign up</a>
                   </li>
+                  {% endif %}
                 </ul>
               </div>
             </div>
           </nav>
+
         <!-- Code for using Flask flash -->
         <div class="container-fluid">
             {% with messages = get_flashed_messages() %}
@@ -82,6 +92,23 @@
             {% endif %}
             {% endwith %}
         </div>
+
+        <!-- flashes any messages to the user -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %} <!-- check if there are any messages -->
+      <div class="container-fluid">
+         <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+            {% for message in messages %} <!--loop through the messages-->
+            <div class="alert alert-info">{{ message }}</div> <!--display as alert-->
+            {% endfor %}
+         </div>
+      </div>
+      </div>
+      {% endif %}
+      {% endwith %}
+
+
         {% block header %}
 
         {% endblock %}
