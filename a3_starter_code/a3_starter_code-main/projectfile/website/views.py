@@ -18,3 +18,10 @@ def search():
         return render_template('index.html', events=events)
     else:
         return redirect(url_for('main.index'))
+@mainbp.route('/events')
+def events():
+    return render_template('show.html', events=events)
+
+@mainbp.route('/booking')
+def booking():
+    return render_template('bhistory.html', events=events)
