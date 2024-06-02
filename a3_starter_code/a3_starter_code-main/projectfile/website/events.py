@@ -1,26 +1,27 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event, Comment
-from .forms import DestinationForm, CommentForm
+from .forms import EventForm, CommentForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
 #additional import:
 from flask_login import login_required, current_user
 
-destbp = Blueprint('events', __name__, url_prefix='/events')
+eventbp = Blueprint('event', __name__, url_prefix='/events')
 
-@destbp.route('/<id>')
+@eventbp.route('/<id>')
 def show(id):
-    Event = db.session.scalar(db.select(Event).where(Event.id==id))
+    event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
     form = CommentForm()    
+    events = [event]
     return render_template('events/show.html', events=events, form=form)
 
-@destbp.route('/create', methods=['GET', 'POST'])
+@eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
   print('Method type: ', request.method)
-  form = DestinationForm()
+  form = EventForm()
   if form.validate_on_submit():
     #call the function that checks and returns image
     db_file_path = check_upload_file(form)
@@ -30,7 +31,7 @@ def create():
     db.session.add(event)
     # commit to the database
     db.session.commit()
-    flash('Successfully created new travel destination', 'success')
+    flash('Successfully created new event', 'success')
     #Always end with redirect when form is valid
     return redirect(url_for('event.create'))
   return render_template('events/create.html', form=form)
@@ -49,7 +50,7 @@ def check_upload_file(form):
   fp.save(upload_path)
   return db_upload_path
 
-@destbp.route('/<id>/comment', methods=['GET', 'POST'])  
+@eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
 @login_required
 def comment(id):  
     form = CommentForm()  
