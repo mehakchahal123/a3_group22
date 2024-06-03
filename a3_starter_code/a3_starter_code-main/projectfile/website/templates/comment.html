@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .comment-box{
+            width: 50%;
+            border: 1px solid #ccc;
+            margin: 50px 0;
+            padding: 10px 20px;
+            font-family: 'poppins', 'san-serif';
+            border-radius: 5px;
+            margin-left: 25%;
+            margin-top: 80px;
+            box-shadow: 0px 0px 10px 1px rgb(165,165,165);
+        }
+
+        .comment-box p{
+            text-align: left;
+            font-size: 28px;
+            color: #777;
+            
+        }
+
+        .comment-form input, .comment-form textarea{
+            width:100%;
+            padding:10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 18px;
+            font-family: 'poppins', 'san-serif';
+            border: 1px solid #ddd;
+            color: #777;
+        }
+
+        .comment-form button{
+            margin:10px 0;
+            border:none;
+            background-color: #d0d0d0;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 3px;
+            color: #444;
+        
+        }
+
+        .button:hover {
+            color: white;
+            background-color: #444;
+        }
+        @media(max-width: 900px){
+            .comment-box{
+                width: 80%;
+                margin: 5%;
+            }
+        }
+
+        
+    </style>
+
+
+</head>
+
+<body>
+    <div class = "comment-box">
+        <p>Leave a Comment</p>
+        <form class = "comment-form">
+            <input type ="text" placeholder="Name">
+            <input type ="datetime-local" placeholder="Date">
+            <textarea rows="10" Placeholder="Write Your Comment"></textarea>
+            <button type="Submit">Post Comment</button>
+        </form>
+
+    </div>
+</body>
