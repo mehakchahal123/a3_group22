@@ -511,4 +511,21 @@ span{
 
 }
 
+#userform-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+}
 
+#userform-card .form-control {
+  border-radius: 5px;
+}
+
+#userform-card .btn-primary {
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+#userform-card .btn-primary:hover {
+  background-color: #23272b;
+  border-color: #23272b;
+}
