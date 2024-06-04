@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event, Comment, Booking
-from .forms import EventForm, CommentForm, BookingForm
+from .forms import EventForm, CommentForm, BookingForm, EditForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -38,6 +38,36 @@ def create():
     #Always end with redirect when form is valid
     return redirect(url_for('event.create'))
   return render_template('events/create.html', form=form)
+
+@eventbp.route('/edit/<int:eventid>', methods=['GET', 'POST'])
+@login_required
+def edit_event(eventid):
+    event = Event.query.get_or_404(eventid)
+    if current_user.id != event.userid:
+        flash('You do not have permission to edit this event.', 'danger')
+        return redirect(url_for('event.show', id=event.id))  
+    form = EditForm(obj=event)  # Pre-fill form with event data on GET
+
+    if form.validate_on_submit():
+        # Update the event details
+        event.eventName=form.eventName.data
+        event.description=form.description.data
+        event.eventstartDateTime=form.eventstartDateTime.data
+        event.eventendDateTime=form.eventendDateTime.data
+        event.eventType=form.eventType.data
+        event.eventLocation=form.eventLocation.data
+        event.ticketQuantity=form.ticketQuantity.data
+        event.ticketsAvailable=form.ticketQuantity.data
+        event.ticketPrice=form.ticketPrice.data
+        event.status = form.status.data
+
+        db.session.commit()
+        flash('Event updated successfully!', 'success')
+        return redirect(url_for('event.show', id=event.id))  
+
+    return render_template('events/edit.html', form=form, eventid=eventid)
+
+
 
 def check_upload_file(form):
   #get file data from form  

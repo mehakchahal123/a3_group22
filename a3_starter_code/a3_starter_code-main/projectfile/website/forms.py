@@ -44,6 +44,22 @@ class EventForm(FlaskForm):
   eventType = SelectField('Event Status', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()]) 
   submit = SubmitField("Create Event")
 
+
+class EditForm(FlaskForm):
+    eventName = StringField('Event Name', validators=[InputRequired(), Length(max=80)])
+    status = SelectField('Status', choices=[('Open', 'Open'), ('Cancelled', 'Cancelled')])
+    eventstartDateTime = DateTimeLocalField('Start Date and Time', validators=[InputRequired()]) 
+    eventendDateTime = DateTimeLocalField('End Date and Time', validators=[InputRequired()]) 
+    eventLocation = StringField('Event Location', validators=[InputRequired(), Length(max=200)]) 
+    description = TextAreaField('Description', validators=[InputRequired(), Length(max=500)]) 
+    ticketQuantity = IntegerField('Ticket Quantity', validators=[InputRequired(), NumberRange(min=1)]) 
+    ticketPrice = IntegerField('Ticket Price', validators=[InputRequired(), NumberRange(min=0)]) 
+    #eventImage = FileField('Event Image', validators=[ FileRequired(message='Image cannot be empty'), FileAllowed(ALLOWED_FILE, message='Only supports PNG, ]PG, png, jpg')])
+    eventType = SelectField('Event Status', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()])   
+    submit = SubmitField('Update Event')
+
+
+
 class BookingForm(FlaskForm):
    numtickets = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=10)])
    create = SubmitField('Book')

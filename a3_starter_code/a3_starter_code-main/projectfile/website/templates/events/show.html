@@ -5,11 +5,13 @@
   <main>
     <div class="eventthing">
       <div class="row">
+        <!-- Edit Event Button -->
         <div class="col-md-6" id="i1">
           <div class="imagesbundle">
             <div class="image-fader">
               <img id='back' src="{{'..'+event.eventImage}}" alt="{{event.eventName}}" width="100%" height="50%"/>
             </div>
+            
           </div>
           <div class="container mt-5">
             <div class="d-flex justify-content-center row">
@@ -44,6 +46,9 @@
           <br>
           <br>
           <h1 id="write1"> {{event.eventName}} </h1>
+          {% if current_user.is_authenticated and current_user.id == event.userid %}
+          <a href="{{ url_for('event.edit_event', eventid=event.id) }}" class="btn btn-info">Edit Event</a>
+        {% endif %}
           <h4 id="write">Location-</h4><p>{{event.eventLocation}}</p>
           <h4 id="write">Start Date & Time-</h4><p>{{event.eventstartDateTime}}</p>
           <h4 id="write">End Date & Time-</h4><p>{{event.eventendDateTime}}</p>
