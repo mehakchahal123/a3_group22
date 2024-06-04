@@ -28,151 +28,24 @@
       <div class="container text-center">
         <h1 id="headfor1"> All Upcoming Events</h1>
         <div id="rowcard" class="row g-3">
+          {% for event in events %}
           <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="card bg-black rounded-5 ">
               <div class="image-container">
-                <img id="imgcard" src="../static/img/ph1.png" class="rounded-5" alt="card1"  height="200" />
-                <div class="overlay-text" id="open"><b>Open</b></div>
+                <img id="imgcard" src="{{'..'+event.eventImage}}" alt="{{event.eventName}}" class="rounded-5" height="200" />
+                <div class="overlay-text" id="{{event.eventStatus.lower()}}"><b>{{event.eventStatus}}</b></div>
               </div>  
               <div class="text text-light">
-                <h2>Illusion</h2>
-                <h6>by David Cooperfield</h6>
-                <h6>(Brisbane)</h6>
-                <p>On 20th May, 2024<br>
-                From 9.30pm - 11.30pm</p>
-                <a  href="../root/event.html">
+                <h2>{{event.eventName}}</h2>
+                <h6>({{event.eventLocation}})</h6>
+                <p>On {{event.eventstartDateTime}}</p>
+                <a href="{{url_for('event.show', id=event.id)}}">
                 <button class="btn btn-outline-light">Show Details</button>
                 </a>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph3.png" class="rounded-5" alt="card2"  height="200" />
-                <div class="overlay-text" id="open"><b>Open</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Beyond Reality</h2>
-                <h6>by Jaden Boon</h6>
-                <h6>(Brisbane)</h6>
-                <p>On 24th May, 2024<br>
-                From 8.00pm - 10.00pm</p>
-                <a  href="../root/event.html">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph4.png" class="rounded-5" alt="card3"  height="200" />
-                <div class="overlay-text"><b>canceled</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Possum Magic</h2>
-                <h6>by Andy Nunn</h6>
-                <h6>(Sydney)</h6>
-                <p>On 5th June, 2024<br>
-                From 8.30pm - 10.00pm</p>
-                <a  href="../root/event.html">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph5.jpg" class="rounded-5" alt="card4"  height="200" />
-                <div class="overlay-text"><b>Sold out</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Quantum Magic</h2>
-                <h6>by Adom Axford</h6>
-                <h6>(Sydney)</h6>
-                <p>On 20th June, 2024<br>
-                From 8.00pm - 10pm</p>
-                <a  href="#">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="rowcard" class="row g-3">
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph7.jpg" class="rounded-5" alt="card3"  height="200" />
-                <div class="overlay-text" id="open"><b>Open</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Visionary</h2>
-                <h6>by Mark Williams</h6>
-                <h6>(Melbourne)</h6>
-                <p>On 20th June, 2024<br>
-                From 8.30pm - 9.30pm</p>
-                <a  href="#">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph8.jpg" class="rounded-5" alt="card3"  height="200" />
-                <div class="overlay-text"><b>Inactive</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Children's Magic</h2>
-                <h6>by Will Wolfard</h6>
-                <h6>(Sydney)</h6>
-                <p>On 20th June, 2024<br>
-                From 10 am - 11.30am</p>
-                <a  href="#">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph9.jpg" class="rounded-5" alt="card3"  height="200" />
-                <div class="overlay-text" id="open"><b>Open</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Wizard</h2>
-                <h6>by Beny Orson</h6>
-                <h6>(Brisbane)</h6>
-                <p>On 21st June, 2024<br>
-                From 8.30pm - 10.30pm</p>
-                <a  href="#">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-black rounded-5 ">
-              <div class="image-container">
-                <img id="imgcard" src="../static/img/ph10.png" class="rounded-5" alt="card3"  height="200" />
-                <div class="overlay-text" id="open"><b>Open</b></div>
-              </div>  
-              <div class="text text-light">
-                <h2>Fictional</h2>
-                <h6>by Aiden Bryer</h6>
-                <h6>(Melbourne)</h6>
-                <p>On 25th June, 2024<br>
-                From 8.30pm - 10.30pm</p>
-                <a  href="#">
-                <button class="btn btn-outline-light">Show Details</button>
-                </a>
-              </div>
-            </div>
+          {% endfor %}
           </div>
         </div>
       </div>
