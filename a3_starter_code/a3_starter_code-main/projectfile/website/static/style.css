@@ -529,3 +529,38 @@ span{
   background-color: #23272b;
   border-color: #23272b;
 }
+
+/*for categories*/
+#ul{
+  list-style:none;
+  background-color:rgba(0, 0, 0, 0.854);
+  border-radius:20px;
+}
+
+#li{
+  display: inline-block;
+  margin-right:10px;
+  font-style: italic;
+}
+#le{
+  display: inline-block;
+  margin-right:10px;
+  color:white;
+  padding-right:30px;
+  font-style: italic;
+}
+
+#opt{
+  border-radius:10px;
+  background-color:rgb(0, 0, 0);
+  color:white;
+  padding-right:30px;
+  padding-left:30px;
+}
+
+#opt:hover{
+  background-color:rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
+}
+
+
