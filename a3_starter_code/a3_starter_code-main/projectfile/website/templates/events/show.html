@@ -54,14 +54,8 @@
           <h4 id="write">Buy Tickets-</h4>
           <div id='get' class="bg-white p-2 col-md-6 col-lg-5 col-xl-5">
             <div class="getticket">
-              <h8>Enter number of Tickets</h8>
-            <div class="input-group1">
-              <input type="number" id="dollar" min="1" required>
-              <label for="dollart">Tickets available</label>
+              {{ render_form(bookingform,"/events/{0}/booking".format(event.id)) }}
             </div>
-            <a  class="btn btn-outline-light"><button id="but" onclick="alert('view your cart!!');">Add to Cart</button></a>
-            <a class="btn btn-outline-light" href="http://127.0.0.1:5500/root/bHistory.html"><button id="but" >View cart</button></a>
-          </div>
         </div>
       </div>
     </div>

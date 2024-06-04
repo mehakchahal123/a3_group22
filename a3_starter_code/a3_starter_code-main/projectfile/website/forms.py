@@ -28,9 +28,9 @@ ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 #User comment
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
-  submit = SubmitField('Create')
+  submit = SubmitField('Post')
 
-#Create new destination
+#Create new events
 class EventForm(FlaskForm): 
   eventName = StringField('Event Name', validators=[InputRequired(), Length(max=80)]) 
   eventstartDateTime = DateTimeLocalField('Start Date and Time', validators=[InputRequired()]) 
@@ -43,3 +43,7 @@ class EventForm(FlaskForm):
   #eventStatus = SelectField('Event Status', choices=[('Open', 'Open'), ('Inactive', 'Inactive'), ('Cancelled', 'Cancelled'), ('Sold Out', 'Sold Out')], validators=[InputRequired()]) 
   eventType = SelectField('Event Status', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()]) 
   submit = SubmitField("Create Event")
+
+class BookingForm(FlaskForm):
+   numtickets = IntegerField('Number of Tickets', validators=[InputRequired(), NumberRange(min=1, max=10)])
+   create = SubmitField('Book')

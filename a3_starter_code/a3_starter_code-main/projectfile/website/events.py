@@ -1,6 +1,7 @@
+from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import Event, Comment
-from .forms import EventForm, CommentForm
+from .models import Event, Comment, Booking
+from .forms import EventForm, CommentForm, BookingForm
 from . import db
 import os
 from werkzeug.utils import secure_filename
@@ -13,9 +14,10 @@ eventbp = Blueprint('event', __name__, url_prefix='/events')
 def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
-    form = CommentForm()    
+    form = CommentForm()
+    bookingform = BookingForm()
     #events = [event]
-    return render_template('events/show.html', event=event, form=form)
+    return render_template('events/show.html', event=event, form=form, bookingform=bookingform)
 
 
 @eventbp.route('/create', methods=['GET', 'POST'])
@@ -70,3 +72,34 @@ def comment(id):
       # print('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
     return redirect(url_for('event.show', id=id))
+
+@eventbp.route('<int:eventid>/booking', methods=['POST'])
+@login_required
+def book(eventid):
+    form = BookingForm()
+    event = db.session.scalar(db.select(Event).where(Event.id==eventid))
+    if form.validate_on_submit():  
+      # Pulling ticket data and storing in field tickets_to_book
+      tickets_to_book = form.numtickets.data
+      # Verifying the number of tickets remaining
+      tickets_remaining = event.ticketsAvailable
+      # Checking that remaining tickets is greater than number of tickets remaining
+      if tickets_to_book > tickets_remaining:
+         flash(f'Not enough tickets available. Only {tickets_remaining} tickets left.', 'danger')
+         return redirect(url_for('event.show', id=eventid))
+      # read the booking from the form
+      booking = Booking(numTickets=form.numtickets.data, totalPrice=(form.numtickets.data*event.ticketPrice), booked_at=datetime.now(), event=event, user=current_user) 
+      db.session.add(booking) 
+      event.ticketsAvailable = event.ticketsAvailable - tickets_to_book
+      db.session.commit() 
+      # Update the event status if no tickets are remaining
+      if event.ticketsAvailable == 0:
+        event.status = "Sold Out"
+        db.session.commit()
+      # flashing a message which needs to be handled by the html
+      flash('Your booking has been added', 'success')  
+    #Error handling in case booking fails for unknown reason
+    else:
+       flash('Failed to book tickets.', 'danger')
+    # using redirect sends a GET request to destination.show
+    return redirect(url_for('event.show', id=eventid))
