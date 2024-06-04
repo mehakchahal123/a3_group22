@@ -50,6 +50,16 @@ body{
 
 .navbar-custom {
   background-color: black;
+  border-bottom: 2px solid #6c757d;
+}
+
+.navbar-custom .nav-link {
+  color: #ffffff8d;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ffffff;
 }
 
 .top{
