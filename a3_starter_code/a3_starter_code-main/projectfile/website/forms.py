@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField, DateTimeLocalField, IntegerField, SelectField
+from wtforms.validators import InputRequired, Length, Email, EqualTo, NumberRange
 from flask_wtf.file import FileRequired, FileField, FileAllowed
 
 #creates the login information
@@ -25,18 +25,23 @@ class RegisterForm(FlaskForm):
 
 ALLOWED_FILE = {'PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg'}
 
-#Create new destination
-class EventForm(FlaskForm):
-  name = StringField('Country', validators=[InputRequired()])
-  description = TextAreaField('Description', 
-            validators=[InputRequired()])
-  image = FileField('Destination Image', validators=[
-    FileRequired(message='Image cannot be empty'),
-    FileAllowed(ALLOWED_FILE, message='Only supports PNG, JPG, png, jpg')])
-  currency = StringField('Currency', validators=[InputRequired()])
-  submit = SubmitField("Create")
-
 #User comment
 class CommentForm(FlaskForm):
   text = TextAreaField('Comment', [InputRequired()])
   submit = SubmitField('Create')
+
+#Create new destination
+class EventForm(FlaskForm): 
+  eventName = StringField('Event Name', validators=[InputRequired(), Length(max=80)]) 
+  eventstartDateTime = DateTimeLocalField('Start Date and Time', validators=[InputRequired()], format='%Y4m4d %H:%m:%S') 
+  eventendDateTime = DateTimeLocalField('End Date and Time', validators=[InputRequired()], format='%Y4m4d %H:%M:%S') 
+  eventType = StringField('Event Type', validators=[InputRequired(), Length(max=50)]) 
+  eventLocation = StringField('Event Location', validators=[InputRequired(), Length(max=200)]) 
+  description = TextAreaField('Description', validators=[InputRequired(), Length(max=500)]) 
+  ticketQuantity = IntegerField('Ticket Quantity', validators=[InputRequired(), NumberRange(min=1)]) 
+  ticketPrice = IntegerField('Ticket Price', validators=[InputRequired(), NumberRange(min=0)]) 
+  eventImage = FileField('Event Image', validators=[ FileRequired(message='Image cannot be empty'), FileAllowed(ALLOWED_FILE, message='Only supports PNG, ]PG, png, jpg')])
+  eventStatus = SelectField('Event Status', choices=[('Open', 'Open'), ('Inactive', 'Inactive'), ('Cancelled', 'Cancelled'), ('Sold Out', 'Sold Out')], validators=[InputRequired()]) 
+  eventType = SelectField('Event Status', choices=[('Cat1', 'Cat1'), ('Cat2', 'Cat2'), ('Cat3', 'Cat3'), ('Cato', 'Cat 5')], validators=[InputRequired()]) 
+  submit = SubmitField("Create Event") 
+
