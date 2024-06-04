@@ -18,10 +18,9 @@
     <header>
 
         <!-- Navbar -->
-        <nav class="navbar navbar-custom navbar-expand-lg bg-body-tertiary fixed-top">
-          <a class="navbar-brand mr-lg-5" href="{{url_for('main.index')}}"><b>Events in Brisbane</b></a>
+        <nav class="navbar navbar-custom navbar-expand-lg bg-body-tertiary fixed-top bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="{{url_for('main.index')}}">
                 <img src="../static/img/logo.png" alt="MagicShow" width="150" height="50">
               </a>
             
@@ -33,20 +32,10 @@
                 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('event.create')}}">Create Event</a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Find Event
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="">All Events</a></li>
-                      <li><a class="dropdown-item" href="">By location <i class="fa-solid fa-location-crosshairs"></i></a></li>
-                    </ul>
-                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.history')}}">Booking History</a>
                   </li>
                 </ul>
               </div>

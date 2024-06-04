@@ -1,137 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Event</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="../static/style.css">
-  <script src="https://kit.fontawesome.com/5dd3a889b8.js" crossorigin="anonymous"></script>
-</head>
-
-
-<body>
-  <header>
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="../static/img/logo.png" alt="MagicShow" width="150" height="50">
-          </a>
-        
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="create.html">Create Event</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Find Event
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="event.html">All Events</a></li>
-                  <li><a class="dropdown-item" href="event.html">By location <i class="fa-solid fa-location-crosshairs"></i></a></li>
-            </ul>
-          </div>
-
-          <form class="d-flex" role="search">
-            
-            <input class="form-control me-2" type="search" placeholder="Search Event" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            
-          </form>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-user"></i>  Hello Yatri!!
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Setting</a></li>
-                  <li><a class="dropdown-item" href="index.html">Log out</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-  </header>
-
- 
+{% extends 'base.html' %}
+ {% block content %}
   <main>
     <div id="history1" class="container-fluid d-flex bg-white bg-body-tertiary col-md-11">
       
-      <div class="row ">
+      <div class="row">
         <h1 id="book1">Booking History</h1>
+
+        {% if bookings %}
+
+        {% for booking in bookings %}
         <div id="first" class="d-flex col-md-11">
-           
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <img class="rounded-5" src="../static/img/ph1.png" alt="event1" width="250px" height="200px">
+            <img class="rounded-5" src="{{'..'+booking.event.eventImage}}" alt="event1" width="250px" height="200px">
           </div>
           <div class="col-lg-5 col-md-2">
-            <h6 id="write4">Event-Illusion in Brisbane<br>by Mark grantham </h6>
+            <h6 id="write4">{{booking.event.eventName}}</h6>
             
-            <h6 id="write3">Location-  Brisbane entertainment center</h6>
-            <h6 id="write3">Time & date of booking- on 5th May, 2023<br>
+            <h6 id="write3">Location- {{booking.event.eventLocation}}</h6>
+            <h6 id="write3">Time & date of booking- {{booking.booked_at.strftime("%d/%m/%Y, %H:%M %p")}}<br>
             at 10.30pm</h6>
-            <h6 id="write3">Order confirmation id - #3980712345</h6>
+            <h6 id="write3">Order confirmation id - #{{booking.id}}</h6>
           </div>
           <div id="price" class="col-lg-2 col-md-4">
-            <h7 id="write3">Number Of Tickets-2</h7>
-            <h6 id="write3">AUD $60</h6>
-            <a href="event.html"><button class="btnb">View Details</button></a>
+            <h7 id="write3">Number Of Tickets- {{booking.numTickets}}</h7>
+            <h6 id="write3">AUD ${{booking.totalPrice}}</h6>
+            <a href="{{url_for('event.show', id=booking.event.id)}}"><button class="btnb">View Details</button></a>
           </div>
         </div>
-        <div id="first" class="d-flex col-md-11">
-          
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <img class="rounded-5" src="../static/img/magician2.png" alt="event2" width="250px" height="200px">
-          </div>
-          <div class="col-lg-5 col-md-2">
-            <h6 id="write4">The Blackmantie<br>by Liam Power </h6>
-            
-            <h6 id="write3">Location- Suncorp stadium, OLD</h6>
-            <h6 id="write3">Time & date of booking- on 23rd October, 2023<br>
-                at 3.00pm</h6>
-            <h6 id="write3">Order confirmation id - #6709712312</h6>
-          </div>
-          <div id="price"class="col-lg-2 col-md-4">
-            <h7 id="write3">Number Of Tickets-4</h7>
-            <h6 id="write3">AUD $440</h6>
-            <a href="event.html"><button class="btnb">View Details</button></a>
-          </div>
-        </div>
-        <div id="first" class="d-flex col-md-11">
-          
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <img class="rounded-5" src="../static/img/magician3.png" alt="event3" width="250px" height="200px">
-          </div>
-          <div class="col-lg-5 col-md-2">
-            <h6 id="write4">The Gentleman magician<br>by Bruce glen </h6>
-            
-            <h6 id="write3">Location- Brothet leagues club ipswich OLD</h6>
-            <h6 id="write3">Time & date of booking- on 10th November, 2023<br>
-                at 11:30 am</h6>
-            <h6 id="write3">Order confirmation id - #9870712564</h6>
-          </div>
-          <div id="price" class="col-lg-2 col-md-4" >
-            <h7 id="write3">Number Of Tickets-1</h7>
-            <h6 id="write3">AUD $130</h6>
-            <a href="event.html"><button class="btnb">View Details</button></a>
-          </div>
-        </div>
+        {% endfor %}
+        {% else %}
+        <p>It's time for you to disappear and make some bookings!</p>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-10">
@@ -139,7 +38,7 @@
         <li class="page-item">
           <a class="page-link">Previous</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link active" href="#">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>
         <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
@@ -148,62 +47,4 @@
       </ul>
     </div>
   </main>
-
-
-  <footer>
-    <section class="top">
-      <img id="footerimage" src="../static/img/logo.png" width="150" height="50" >
-      <div class="footer">
-        <div class="row footerrow text-left">
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h3>About MagicShow</h3>
-             <ul class="list-unstyled">
-              <li> <a>Create event</a> </li>
-              <li> <a>Explore event</a> </li>
-              <li> <a>Event markettinhg platform</a> </li>
-              <li> <a>E-Ticket available</a> </li>
-              <li> <a>Create Account</a> </li>
-              <li> <a>Share experience</a> </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h3>Find Events</h3>
-              <ul class="list-unstyled">
-              <li> <a>Search by location</a> </li>
-              <li>  <a>in Brisbane</a> </li>
-              <li>  <a>in Sydney</a> </li>
-              <li>  <a>in Melbourne</a> </li>
-              <li>  <a>in Perth</a> </li>
-              <li>  <a>All upcoming events</a> </li>
-              </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h3>Create Events</h3>
-              <ul class="list-unstyled">
-              <li> <a>Register</a> </li>
-              <li>  <a>Event details</a> </li>
-              <li>  <a>Magician details</a> </li>
-              <li>  <a>Ticket details</a> </li>
-              <li>  <a>Upload event image</a> </li>
-              <li>  <a>post comment</a> </li>
-              </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h3>Book Tickets</h3>
-              <ul class="list-unstyled">
-                <li> <a>Register</a> </li>
-                <li>  <a>number of tickets</a> </li>
-                <li>  <a>Type of ticket</a> </li>
-              <li>  <a>order ticket</a> </li>
-              <li>  <a>order confirmation id</a> </li>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="bottom">© 2023 MagicShow</section>
-  </footer>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
