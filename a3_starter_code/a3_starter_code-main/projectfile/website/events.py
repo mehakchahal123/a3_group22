@@ -17,16 +17,17 @@ def show(id):
     events = [event]
     return render_template('events/show.html', events=events, form=form)
 
+
 @eventbp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
-  print('Method type: ', request.method)
+  #print('Method type: ', request.method)
   form = EventForm()
   if form.validate_on_submit():
     #call the function that checks and returns image
     db_file_path = check_upload_file(form)
-    event = Event(name=form.name.data,description=form.description.data, 
-    image=db_file_path,currency=form.currency.data)
+    event = Event(userid=current_user.id,eventName=form.eventName.data,description=form.description.data, eventstartDateTime=form.eventstartDateTime.data, eventendDateTime=form.eventendDateTime.data, eventType=form.eventType.data, eventLocation=form.eventLocation.data, ticketQuantity=form.ticketQuantity.data, ticketsAvailable=form.ticketQuantity.data, ticketPrice=form.ticketPrice.data,
+    eventImage=db_file_path,eventStatus='Open')
     # add the object to the db session
     db.session.add(event)
     # commit to the database
@@ -38,14 +39,14 @@ def create():
 
 def check_upload_file(form):
   #get file data from form  
-  fp = form.image.data
+  fp = form.eventImage.data
   filename = fp.filename
   #get the current path of the module file… store image file relative to this path  
   BASE_PATH = os.path.dirname(__file__)
   #upload file location – directory of this file/static/image
-  upload_path = os.path.join(BASE_PATH, 'static/image', secure_filename(filename))
+  upload_path = os.path.join(BASE_PATH, 'static/img', secure_filename(filename))
   #store relative path in DB as image location in HTML is relative
-  db_upload_path = '/static/image/' + secure_filename(filename)
+  db_upload_path = '/static/img/' + secure_filename(filename)
   #save the file and return the db upload path
   fp.save(upload_path)
   return db_upload_path
@@ -53,7 +54,7 @@ def check_upload_file(form):
 @eventbp.route('/<id>/comment', methods=['GET', 'POST'])  
 @login_required
 def comment(id):  
-    form = CommentForm()  
+    form = CommentForm()
     #get the destination object associated to the page and the comment
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     if form.validate_on_submit():  
