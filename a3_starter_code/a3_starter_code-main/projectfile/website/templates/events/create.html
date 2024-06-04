@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
-
 {% from 'bootstrap5/form.html' import render_form %}
 
-{% block content %}
-<br><br><br>
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <h1>Add Your Event!</h1>
-        <p>Enter some details so you can attract your audience.</p>
-        {{ render_form(form) }}
-      </div>
-    </div>
-  </div>
+{% block title %}Add Your Event{% endblock %}
 
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 100px;">
+    <div class="col-md-6">
+        <div class="card shadow p-4" id="userform-card">
+            <h1 class="text-center mb-4">Add Your Event!</h1>
+            <p class="text-center mb-4">Enter some details so you can attract your audience.</p>
+            {{ render_form(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
