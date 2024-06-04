@@ -14,8 +14,8 @@ def show(id):
     event = db.session.scalar(db.select(Event).where(Event.id==id))
     # create the comment form
     form = CommentForm()    
-    events = [event]
-    return render_template('events/show.html', events=events, form=form)
+    #events = [event]
+    return render_template('events/show.html', event=event, form=form)
 
 
 @eventbp.route('/create', methods=['GET', 'POST'])
