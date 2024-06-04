@@ -35,7 +35,7 @@ class Event(db.Model):
     description = db.Column(db.String(200))
     ticketQuantity = db.Column(db.Integer)
     ticketsAvailable = db.Column(db.Integer)
-    ticketPrice = db.Column(db.Integer)
+    ticketPrice = db.Column(db.Float)
     eventImage = db.Column(db.String(400))
     eventStatus = db.Column(db.String(10))
 
@@ -45,7 +45,6 @@ class Event(db.Model):
     def __repr__(self):
         return f"Name: {self.name}"
 
-    
 
 
 class Comment(db.Model):
@@ -64,8 +63,9 @@ class Comment(db.Model):
 class Booking(db.Model):
     __tablename__ = 'bookings'
     id = db.Column(db.Integer, primary_key=True)
+    booked_at = db.Column(db.DateTime, default=datetime.now())
     numTickets = db.Column(db.Integer)
-    totalPrice = db.Column(db.Integer)
+    totalPrice = db.Column(db.Float)
     #add the foreign keys
     userid = db.Column(db.Integer, db.ForeignKey('users.id'))
     eventid = db.Column(db.Integer, db.ForeignKey('events.id'))
