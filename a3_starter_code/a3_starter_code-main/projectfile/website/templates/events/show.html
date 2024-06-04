@@ -13,51 +13,28 @@
           </div>
           <div class="container mt-5">
             <div class="d-flex justify-content-center row">
+              <div class="row"> 
+                {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
+                <br><br>
+              </div>  
+              
               <div class="col-md-10" id="sect">
+                <br><br>
+                {% for comment in event.comments %} 
                 <div class="bg-white p-2">
                   <div class="d-flex flex-row user-info">
-                    <img id="i2"  src="../static/img/magician1.png" alt="userimage" width="40" height="60">
+                      <img id="i2"  src="../static/img/magician1.png" alt="userimage" width="40" height="60">
                     <div class="addingtext">
-                      <span id='font1' class="d-block font-weight-bold name p-2">Andrew Mither</span>
-                      <span id='font2' class="date text-black-50">Share publically- 26th April 2024</span>
+                      <span id='font1' class="d-block font-weight-bold name p-2">{{ comment.user.userName }}</span>
+                      <span id='font2' class="date text-black-50">{{ comment.created_at.strftime("%d/%m/%Y, %H:%M %p") }}</span>
                     </div>
-
-                  </div>
-                  <div class="Comments">
-                  <div class="input-group2">
-                    <textarea type="text" id="message" rows="8" placeholder="add comment"></textarea>
-                    <label for="message" ></label>
-                  </div>
-                  </div>
-                  <button id="commentbtn" class="btn">post</button>
-                  <p class="commentin">Comments</p>
-
-                </div>
-                <div class="bg-white p-2">
-                  <div class="d-flex flex-row user-info">
-                    <img id="i2"  src="../static/img/magician2.png" alt="userimage" width="40" height="60">
-                    <div class="addingtext">
-                      <span id='font1' class="d-block font-weight-bold name p-2">Kristian Washington</span>
-                      <span id='font2' class="date text-black-50">Shared publically- 2nd April 2023</span>
-                      <p class="commenton">
-                        Is an Amazing Magic show event as attended the same last year.
-                        I was suprised by the tricks.
-                      </p>
+                      
                     </div>
+                    <p class="commenton">
+                      {{ comment.comment }} 
+                    </p>
                   </div>
-                </div>
-                <div class="bg-white p-2">
-                  <div class="d-flex flex-row user-info">
-                    <img id="i2"  src="../static/img/magician3.png" alt="userimage" width="40" height="60">
-                    <div class="addingtext">
-                      <span id='font1' class="d-block font-weight-bold name p-2">Stefan gomez</span>
-                      <span id='font2' class="date text-black-50">Shared publically- 5th April 2023</span>
-                      <p class="commenton">
-                        I had a mind blowing expereince. The magician tricked me so many time. The best thing about the show is that you get involved in magic as I was  called by the magician on the stage and literally tricked me with the illusion. 
-                      </p>
-                    </div>
-                  </div>
-                </div>  
+                {% endfor %} 
               </div>
             </div>
           </div>
