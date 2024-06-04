@@ -39,10 +39,10 @@
                   </li>
                 </ul>
               </div>
-    
-              <form class="d-flex" role="search">
+              
+              <form class="d-flex" role="search" action="{{url_for('main.search')}}">
                 
-                <input class="form-control me-2" style="width:50%;" type="search" placeholder="Search Event" aria-label="Search">
+                <input class="form-control me-2" style="width:50%;" type="search" name="search" id="SearchForm" placeholder="Search Event by Name" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 
               </form>

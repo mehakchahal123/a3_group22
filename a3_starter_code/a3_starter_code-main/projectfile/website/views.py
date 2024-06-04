@@ -17,7 +17,7 @@ def search():
         events = db.session.scalars(db.select(Event).where(Event.eventName.like(query)))
         return render_template('index.html', events=events)
     else:
-        return redirect(url_for('main.index'))
+        return render_template('index.html', events=events)
     
 @mainbp.route('/history')
 @login_required
