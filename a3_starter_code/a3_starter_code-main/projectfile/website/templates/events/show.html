@@ -50,6 +50,7 @@
           <a href="{{ url_for('event.edit_event', eventid=event.id) }}" class="btn btn-info">Edit Event</a>
         {% endif %}
           <h4 id="write">Location-</h4><p>{{event.eventLocation}}</p>
+          <h4 id="write">Category-</h4><p>{{event.eventType}}</p>
           <h4 id="write">Start Date & Time-</h4><p>{{event.eventstartDateTime}}</p>
           <h4 id="write">End Date & Time-</h4><p>{{event.eventendDateTime}}</p>
           <h4 id="write">Price per Ticket-</h4><p>AUD ${{event.ticketPrice}}</p>
