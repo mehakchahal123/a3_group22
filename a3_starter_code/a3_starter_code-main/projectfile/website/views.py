@@ -7,7 +7,7 @@ mainbp = Blueprint('main', __name__)
 @mainbp.route('/')
 def index():
     events = db.session.scalars(db.select(Event)).all()    
-    return render_template('index.html', events=events)
+    return render_template('index.html', events=events, selected_category=None)
 
 @mainbp.route('/search')
 def search():

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
  {% block content %}
   <main>
-    <div id="history1" class="container-fluid d-flex bg-white bg-body-tertiary col-md-11">
+    <div id="history1" class="container d-flex justify-content-center align-items-center">
       
       <div class="row">
         <h1 id="book1">Booking History</h1>
@@ -11,7 +11,7 @@
         {% for booking in bookings %}
         <div id="first" class="d-flex col-md-11">
           <div class="col-lg-4 col-md-6 col-sm-6">
-            <img class="rounded-5" src="{{'..'+booking.event.eventImage}}" alt="event1" width="250px" height="200px">
+            <img class="rounded-5" src="{{ url_for('static', filename=booking.event.eventImage) }}" class="rounded-5" width="250px" height="200px">
           </div>
           <div class="col-lg-5 col-md-2">
             <h6 id="write4">{{booking.event.eventName}}</h6>

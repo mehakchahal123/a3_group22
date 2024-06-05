@@ -69,8 +69,8 @@ def edit_event(eventid):
 
 @eventbp.route('/category/<category>')
 def filter_by_category(category):
-    events = db.session.query(Event).filter(Event.eventType == category).all()
-    return render_template('index.html', events=events, selected_category=category)
+    event = db.session.query(Event).filter(Event.eventType == category).all()
+    return render_template('index.html', events=event, selected_category=category)
 
 def check_upload_file(form):
   #get file data from form  
@@ -79,9 +79,9 @@ def check_upload_file(form):
   #get the current path of the module file… store image file relative to this path  
   BASE_PATH = os.path.dirname(__file__)
   #upload file location – directory of this file/static/image
-  upload_path = os.path.join(BASE_PATH, 'static/img', secure_filename(filename))
+  upload_path = os.path.join(BASE_PATH, 'static', 'img', filename)
   #store relative path in DB as image location in HTML is relative
-  db_upload_path = '/static/img/' + secure_filename(filename)
+  db_upload_path = 'img/' + filename
   #save the file and return the db upload path
   fp.save(upload_path)
   return db_upload_path
