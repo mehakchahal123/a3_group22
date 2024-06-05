@@ -563,4 +563,13 @@ span{
   color:rgb(0, 0, 0);
 }
 
+.navbar-custom .nav-link {
+  color: #ffffff8d;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: #ffffff;
+}
 
