@@ -67,7 +67,10 @@ def edit_event(eventid):
 
     return render_template('events/edit.html', form=form, eventid=eventid)
 
-
+@eventbp.route('/category/<category>')
+def filter_by_category(category):
+    events = db.session.query(Event).filter(Event.eventType == category).all()
+    return render_template('index.html', events=events, selected_category=category)
 
 def check_upload_file(form):
   #get file data from form  
@@ -133,3 +136,4 @@ def book(eventid):
        flash('Failed to book tickets.', 'danger')
     # using redirect sends a GET request to destination.show
     return redirect(url_for('event.show', id=eventid))
+
