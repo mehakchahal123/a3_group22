@@ -2,73 +2,70 @@
 {% from "bootstrap5/form.html" import render_form %}
 
 {% block content %}
-  <main>
+<main>
     <div class="eventthing">
-      <div class="row">
-        <!-- Edit Event Button -->
-        <div class="col-md-6" id="i1">
-          <div class="imagesbundle">
-            <div class="image-fader">
-              <img id='back' src="{{ url_for('static', filename=event.eventImage) }}" alt="{{ event.eventName }}" class="rounded-5" width="100%" height="50%" style="padding-top: 50px;" />
-            </div>
-            
-          </div>
-          <div class="container mt-5">
-            <div class="d-flex justify-content-center row">
-              <div class="row"> 
-                {{ render_form(form,"/events/{0}/comment".format(event.id)) }}
-                <br><br>
-              </div>  
-              
-              <div class="col-md-10" id="sect">
-                <br><br>
-                {% for comment in event.comments %} 
-                <div class="bg-white p-2">
-                  <div class="d-flex flex-row user-info">
-                      <img id="i2"  src="../static/img/magician1.png" alt="userimage" width="40" height="60">
-                    <div class="addingtext">
-                      <span id='font1' class="d-block font-weight-bold name p-2">{{ comment.user.userName }}</span>
-                      <span id='font2' class="date text-black-50">{{ comment.created_at.strftime("%d/%m/%Y, %H:%M %p") }}</span>
+        <div class="row">
+            <!-- Edit Event Button -->
+            <div class="col-md-6" id="i1">
+                <div class="imagesbundle">
+                    <div class="image-fader">
+                        <img id='back' src="{{ url_for('static', filename=event.eventImage) }}" alt="{{ event.eventName }}" width="100%" height="50%" style="padding-top: 10px;">
                     </div>
-                      
+                </div>
+                <div class="container mt-5">
+                    <div class="d-flex justify-content-center row">
+                        <div class="row">
+                            {{ render_form(form, "/events/{0}/comment".format(event.id)) }}
+                            <br><br>
+                        </div>
+                        <div class="col-md-10" id="sect">
+                            <br><br>
+                            {% for comment in event.comments %}
+                            <div class="bg-white p-2">
+                                <div class="d-flex flex-row user-info">
+                                    <img id="i2" src="{{ url_for('static', filename='img/magician1.png') }}" alt="userimage" width="40" height="60">
+                                    <div class="addingtext">
+                                        <span id='font1' class="d-block font-weight-bold name p-2">{{ comment.user.userName }}</span>
+                                        <span id='font2' class="date text-black-50">{{ comment.created_at.strftime("%d/%m/%Y, %H:%M %p") }}</span>
+                                    </div>
+                                </div>
+                                <p class="commenton">{{ comment.comment }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <p class="commenton">
-                      {{ comment.comment }} 
-                    </p>
-                  </div>
-                {% endfor %} 
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-6" id="phase1">
-          <br>
-          <br>
-          <br>
-          <h1 id="write1"> {{event.eventName}} </h1>
-          {% if current_user.is_authenticated and current_user.id == event.userid %}
-          <a href="{{ url_for('event.edit_event', eventid=event.id) }}" class="btn btn-info">Edit Event</a>
-        {% endif %}
-          <h4 id="write">Location-</h4><p>{{event.eventLocation}}</p>
-          <h4 id="write">Category-</h4><p>{{event.eventType}}</p>
-          <h4 id="write">Start Date & Time-</h4><p>{{event.eventstartDateTime}}</p>
-          <h4 id="write">End Date & Time-</h4><p>{{event.eventendDateTime}}</p>
-          <h4 id="write">Price per Ticket-</h4><p>AUD ${{event.ticketPrice}}</p>
-          <h4 id="write">More about event-</h4>
-          <p>{{event.description}}</p>
+            <div class="col-md-6" id="phase1">
+                <br>
+                <br>
+                <br>
+                <h1 id="write1">{{ event.eventName }}</h1>
+                {% if current_user.is_authenticated and current_user.id == event.userid %}
+                <a href="{{ url_for('event.edit_event', eventid=event.id) }}" class="btn btn-info">Edit Event</a>
+                <form action="{{ url_for('event.delete_event', eventid=event.id) }}" method="POST" style="display: inline;">
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">Delete Event</button>
+                </form>
+                {% endif %}
+                <h4 id="write">Location-</h4>
+                <p>{{ event.eventLocation }}</p>
+                <h4 id="write">Start Date & Time-</h4>
+                <p>{{ event.eventstartDateTime }}</p>
+                <h4 id="write">End Date & Time-</h4>
+                <p>{{ event.eventendDateTime }}</p>
+                <h4 id="write">Price per Ticket-</h4>
+                <p>AUD ${{ event.ticketPrice }}</p>
+                <h4 id="write">More about event-</h4>
+                <p>{{ event.description }}</p>
 
-          <h4 id="write">Buy Tickets-</h4>
-          <div id='get' class="bg-white p-2 col-md-6 col-lg-5 col-xl-5">
-            <div class="getticket">
-              {{ render_form(bookingform,"/events/{0}/booking".format(event.id)) }}
+                <h4 id="write">Buy Tickets-</h4>
+                <div id='get' class="bg-white p-2 col-md-6 col-lg-5 col-xl-5">
+                    <div class="getticket">
+                        {{ render_form(bookingform, "/events/{0}/booking".format(event.id)) }}
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
     </div>
-
-    
-    
-    
-  
-  </main>
-  {% endblock %}
+</main>
+{% endblock %}

@@ -40,8 +40,8 @@ class Event(db.Model):
     eventStatus = db.Column(db.String(10))
     eventType = db.Column(db.String(50), nullable=False)
 
-    bookings = db.relationship('Booking', backref='event')
-    comments = db.relationship('Comment', backref='event')
+    bookings = db.relationship('Booking', backref='event', cascade="all, delete-orphan")
+    comments = db.relationship('Comment', backref='event', cascade="all, delete-orphan")
      # string print method
     def __repr__(self):
         return f"Name: {self.name}"

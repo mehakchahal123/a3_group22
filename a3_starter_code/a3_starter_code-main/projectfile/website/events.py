@@ -67,6 +67,20 @@ def edit_event(eventid):
 
     return render_template('events/edit.html', form=form, eventid=eventid)
 
+
+@eventbp.route('/delete/<int:eventid>', methods=['POST'])
+@login_required
+def delete_event(eventid):
+    event = Event.query.get_or_404(eventid)
+    if current_user.id != event.userid:
+        flash('You cannot delete this event.', 'danger')
+        return redirect(url_for('event.show', id=event.id))
+
+    db.session.delete(event)
+    db.session.commit()
+    flash('Event has been deleted!', 'success')
+    return redirect(url_for('main.index'))
+
 @eventbp.route('/category/<category>')
 def filter_by_category(category):
     event = db.session.query(Event).filter(Event.eventType == category).all()
