@@ -41,7 +41,7 @@ class EventForm(FlaskForm):
   ticketPrice = IntegerField('Ticket Price', validators=[InputRequired(), NumberRange(min=0)]) 
   eventImage = FileField('Event Image', validators=[ FileRequired(message='Image cannot be empty'), FileAllowed(ALLOWED_FILE, message='Only supports PNG, ]PG, png, jpg')])
   #eventStatus = SelectField('Event Status', choices=[('Open', 'Open'), ('Inactive', 'Inactive'), ('Cancelled', 'Cancelled'), ('Sold Out', 'Sold Out')], validators=[InputRequired()]) 
-  eventType = SelectField('Event Status', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()]) 
+  eventType = SelectField('Event Category', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()]) 
   submit = SubmitField("Create Event")
 
 
