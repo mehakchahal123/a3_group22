@@ -59,8 +59,11 @@ def edit_event(eventid):
         event.ticketQuantity=form.ticketQuantity.data
         event.ticketsAvailable=form.ticketQuantity.data
         event.ticketPrice=form.ticketPrice.data
-        event.status = form.status.data
+        event.eventStatus = form.eventStatus.data
 
+        if datetime.now() > event.eventendDateTime:
+            event.eventStatus = "Inactive"
+            
         db.session.commit()
         flash('Event updated successfully!', 'success')
         return redirect(url_for('event.show', id=event.id))  
@@ -141,8 +144,8 @@ def book(eventid):
       db.session.commit() 
       # Update the event status if no tickets are remaining
       if event.ticketsAvailable == 0:
-        event.status = "Sold Out"
-        db.session.commit()
+        event.eventStatus = "Sold Out"
+      db.session.commit()
       # flashing a message which needs to be handled by the html
       flash('Your booking has been added', 'success')  
     #Error handling in case booking fails for unknown reason

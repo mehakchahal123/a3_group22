@@ -53,19 +53,26 @@
                 <p>{{ event.eventstartDateTime }}</p>
                 <h4 id="write">End Date & Time-</h4>
                 <p>{{ event.eventendDateTime }}</p>
+                <h4 id="write">Event Type-</h4>
+                <p>{{ event.eventType }}</p>
                 <h4 id="write">Price per Ticket-</h4>
                 <p>AUD ${{ event.ticketPrice }}</p>
                 <h4 id="write">More about event-</h4>
                 <p>{{ event.description }}</p>
 
-                <h4 id="write">Buy Tickets-</h4>
-                <div id='get' class="bg-white p-2 col-md-6 col-lg-5 col-xl-5">
-                    <div class="getticket">
-                        {{ render_form(bookingform, "/events/{0}/booking".format(event.id)) }}
-                    </div>
+                
+                {% if event.eventStatus not in ['Cancelled', 'Inactive', 'Sold Out'] %}
+                 <h4 id="write">Buy Tickets-</h4>
+                 <div id='get' class="bg-white p-2 col-md-6 col-lg-5 col-xl-5">
+                 <div class="getticket">
+                 {{ render_form(bookingform, "/events/{0}/booking".format(event.id)) }}
                 </div>
-            </div>
-        </div>
-    </div>
-</main>
-{% endblock %}
+                </div>
+                 {% else %}
+                 <h4 id="write" class="text-danger">This event is {{ event.eventStatus.lower() }}. You cannot book tickets.</h4>
+                 {% endif %}
+                </div>
+                </div>
+                </div>
+                </main>
+            {% endblock %}

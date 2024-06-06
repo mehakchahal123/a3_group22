@@ -47,7 +47,6 @@ class EventForm(FlaskForm):
 
 class EditForm(FlaskForm):
     eventName = StringField('Event Name', validators=[InputRequired(), Length(max=80)])
-    status = SelectField('Status', choices=[('Open', 'Open'), ('Cancelled', 'Cancelled')])
     eventstartDateTime = DateTimeLocalField('Start Date and Time', validators=[InputRequired()]) 
     eventendDateTime = DateTimeLocalField('End Date and Time', validators=[InputRequired()]) 
     eventLocation = StringField('Event Location', validators=[InputRequired(), Length(max=200)]) 
@@ -55,7 +54,8 @@ class EditForm(FlaskForm):
     ticketQuantity = IntegerField('Ticket Quantity', validators=[InputRequired(), NumberRange(min=1)]) 
     ticketPrice = IntegerField('Ticket Price', validators=[InputRequired(), NumberRange(min=0)]) 
     #eventImage = FileField('Event Image', validators=[ FileRequired(message='Image cannot be empty'), FileAllowed(ALLOWED_FILE, message='Only supports PNG, ]PG, png, jpg')])
-    eventType = SelectField('Event Status', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()])   
+    eventType = SelectField('Event Category', choices=[('Illusion', 'Illusion'), ('Comedy', 'Comedy'), ('Levitation', 'Levitation'), ('Transformation', 'Transformation'), ('Mentalism', 'Mentalism'), ('Penetration', 'Penetration')], validators=[InputRequired()])  
+    eventStatus = SelectField(' Event Status', choices=[('Open', 'Open'), ('Cancelled', 'Cancelled'), ('Sold Out', 'Sold Out'),('Inactive', 'Inactive')], validators=[InputRequired()]) 
     submit = SubmitField('Update Event')
 
 

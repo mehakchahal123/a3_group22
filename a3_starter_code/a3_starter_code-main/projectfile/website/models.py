@@ -37,8 +37,8 @@ class Event(db.Model):
     ticketsAvailable = db.Column(db.Integer)
     ticketPrice = db.Column(db.Float)
     eventImage = db.Column(db.String(400))
-    eventStatus = db.Column(db.String(10))
     eventType = db.Column(db.String(50), nullable=False)
+    eventStatus = db.Column(db.String(10), nullable=False, default='Open')
 
     bookings = db.relationship('Booking', backref='event', cascade="all, delete-orphan")
     comments = db.relationship('Comment', backref='event', cascade="all, delete-orphan")

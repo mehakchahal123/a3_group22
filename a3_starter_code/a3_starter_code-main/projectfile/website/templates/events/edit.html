@@ -3,17 +3,14 @@
 {% from 'bootstrap5/form.html' import render_form %}
 
 {% block content %}
-
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <br><br>
-        <h1>Update Your Event's Information!</h1>
-        <p>This way you'll always be informing your attendees correctly.</p>
-        {{ render_form(form) }}
-      </div>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-6">
+            <br><br>
+            <h1 class="text-center">Update Your Event's Information!</h1>
+            <p class="text-center">This way you'll always be informing your attendees correctly.</p>
+            {{ render_form(form) }}
+        </div>
     </div>
-  </div>
-
-
+</div>
 {% endblock %}
