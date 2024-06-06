@@ -42,7 +42,7 @@
         <li id="li"><a href="{{ url_for('event.filter_by_category', category='Penetration') }}"><button id="opt">Penetration</button></a></li>
       </ul>
     </div>
-    <h1 id="headfor1" class="text-white">{{ selected_category if selected_category else 'All' }} Upcoming Events</h1>
+    <h1 id="headfor1" class="text-white">{{ selected_category if selected_category else 'All' }} Events</h1>
     <div id="rowcard" class="row g-3">
       {% if events %}
         {% for event in events %}
