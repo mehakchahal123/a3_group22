@@ -499,14 +499,14 @@ span{
 }
 
 #userform-card {
-  background-color: rgba(38, 26, 54, 0.53);
+  background-color: rgba(114, 78, 161, 0.53);
   border-radius: 10px;
   border-radius:50px;
   color:rgb(255, 254, 254);
 }
 
 .in-form{
-  color:rgb(69, 69, 69);
+  color:rgb(255, 255, 255);
 }
 
 #userform-card .form-control {
