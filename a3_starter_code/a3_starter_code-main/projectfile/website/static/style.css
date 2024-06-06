@@ -182,23 +182,6 @@ input,textarea{
   font-size:15px;
 }
 
-/* Yatri can solve this later or she will fail the unit
-label{
-  height:100px;
-  position:absolute;
-  left:0;
-  top:0;
-  padding:10px;
-  color:#000000;
-  cursor:text;
-  transition:0.2s;
-}
-input:focus~label{
-  top:-35px;
-  font-size:14px;
-
-}
-*/
 .row1{
   padding-right: 20px;
 }
@@ -350,6 +333,7 @@ input:focus~label{
 
 
 .image-fader img {
+  margin-top:50px;
   position:relative;
   top: 0%;
   left: 0%;
@@ -497,6 +481,9 @@ span{
   padding-top:30px;
   font-family:Georgia, 'Times New Roman', Times, serif;
   font-style:italic;
+  color:rgb(255, 255, 255);
+  font-weight: bold;
+  font-size:28px;
 }
 
 #write3{
@@ -512,8 +499,10 @@ span{
 }
 
 #userform-card {
-  background-color: rgba(184, 181, 245, 0.9);
+  background-color: rgba(38, 26, 54, 0.53);
   border-radius: 10px;
+  border-radius:50px;
+  color:white;
 }
 
 #userform-card .form-control {
@@ -521,12 +510,14 @@ span{
 }
 
 #userform-card .btn-primary {
-  background-color: #343a40;
-  border-color: #343a40;
+  background-color: #ffffff;
+  border-color: #666363;
+  border-width: 5px;
+  color:black;
 }
 
 #userform-card .btn-primary:hover {
-  background-color: #23272b;
+  background-color: #007dfa;
   border-color: #23272b;
 }
 
@@ -571,5 +562,20 @@ span{
 .navbar-custom .nav-link:hover,
 .navbar-custom .nav-link.active {
   color: #ffffff;
+}
+
+#login1{
+  background:url('../static/img/ph6.jpg');
+  background-size:cover;
+  border-radius: 50px;
+  padding:10px;
+}
+
+#loginlink{
+  color:rgb(0, 182, 254);
+}
+
+#loginlink:hover{
+  color:rgb(255, 255, 255);
 }
 
